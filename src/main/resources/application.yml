@@ -1,0 +1,29 @@
+# web port
+server:
+  port: 8089
+
+spring:
+  application:
+    name: @project.name@
+  profiles:
+    active: prod
+#  datasource:
+#    url: jdbc:oracle:thin:@//10.120.130.186:1521/hncxjm
+#    username: ODS_XNHNEW
+#    password: ODS_XNHNEW
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    hikari:
+#      auto-commit: true
+#      minimum-idle: 10
+#      maximum-pool-size: 30
+#      idle-timeout: 30000
+#      pool-name: HikariCP
+#      max-lifetime: 900000
+#      connection-timeout: 10000
+#      connection-test-query: select 1 from dual
+#    type: com.zaxxer.hikari.HikariDataSource
+
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: /tmp/root/kettle

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+    <!--使用spring boot 配置属性 source 为配置文件的中属性名-->
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+
+    <contextName>logback</contextName>
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+    <springProfile name="prod">
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_HOME}/${APP_NAME}/kettle-executor.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/${APP_NAME}/kettle-executor.log.%d{yyyy-MM-dd}.zip</fileNamePattern>
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date %level [%thread] %logger{36} [%file : %line] %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+
+    <springProfile name="dev">
+        <root level="debug">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+</configuration>

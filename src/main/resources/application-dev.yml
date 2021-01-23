@@ -1,0 +1,23 @@
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/job-admin
+    executor:
+      appname: test
+      address:
+      ip:
+      port: 9999
+      logpath: ${logging.file.path}
+      logretentiondays: 30
+    accessToken:
+
+kettle:
+  encoding: utf-8
+  home: D:\kettle\pdi-ce-5.4.0.1-130\data-integration
+  plugin-packages-path: D:\kettle\pdi-ce-5.4.0.1-130\data-integration\plugins
+  jdbc-file-path:
+  repository:
+    database:
+      type: oracle
+      name: OracleKettle
+    name: OracleKettle
