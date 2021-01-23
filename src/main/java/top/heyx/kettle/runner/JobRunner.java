@@ -46,7 +46,6 @@ public class JobRunner {
         Job job= new Job(rep, jm);
         // 传入kjb需要的变量
         if (CollectionUtil.isNotEmpty(params)) {
-            //log.info();
             XxlJobLogger.log("传入kettle的参数：{}", JsonUtil.toJsonString(params));
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 job.setVariable(entry.getKey(),entry.getValue());
@@ -76,6 +75,7 @@ public class JobRunner {
         }
         job.setFinished(true);
         job.eraseParameters();
+
         logListener=null;
         job=null;
         returnT = new ReturnT<>(IJobHandler.SUCCESS.getCode(),msg);

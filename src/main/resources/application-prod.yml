@@ -1,7 +1,7 @@
 xxl:
   job:
     admin:
-      addresses: http://10.120.132.110:9090/job-admin
+      addresses: http://127.0.0.1:9090/job-admin
     executor:
       appname: cloud
       address:

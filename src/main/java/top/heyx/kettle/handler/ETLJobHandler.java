@@ -42,6 +42,8 @@ public class ETLJobHandler {
         KettleDatabaseRepository dbRepository = getDbRepository();
         ReturnT<String> result = JobRunner.run(dbRepository, params.get("path"), params.get("name"), null, params, LogLevel.BASIC);
         dbRepository.disconnect();
+        dbRepository=null;
+        params=null;
         return result;
     }
 
@@ -51,6 +53,8 @@ public class ETLJobHandler {
         KettleDatabaseRepository dbRepository = getDbRepository();
         ReturnT<String> result = TransExecute.run(dbRepository, params.get("path"), params.get("name"), null, params, LogLevel.BASIC);
         dbRepository.disconnect();
+        dbRepository=null;
+        params=null;
         return result;
     }
 
@@ -91,7 +95,6 @@ public class ETLJobHandler {
     }
 
     public void garbageCollection() {
-
         System.gc();
     }
 }
