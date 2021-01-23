@@ -44,8 +44,6 @@ public class JobRunner {
 
         // 通过元数据获取kjb的实例
         Job job= new Job(rep, jm);
-        // 开启进程守护
-        job.setDaemon(true);
         // 传入kjb需要的变量
         if (CollectionUtil.isNotEmpty(params)) {
             //log.info();
@@ -69,13 +67,17 @@ public class JobRunner {
         List<String> returnTS = checkErr(job);
 
         String msg = String.join(",\r\n", returnTS);
+        returnTS=null;
         if(!job.getResult().getResult()){
             String errMsg = KettleLogStore.getAppender().getBuffer(job.getLogChannelId(), false).toString();
             returnT = new ReturnT<>(IJobHandler.FAIL.getCode(), "作业" +job.getJobname() + " 运行失败\r\n"+errMsg);
+            errMsg=null;
             return returnT;
         }
         job.setFinished(true);
         job.eraseParameters();
+        logListener=null;
+        job=null;
         returnT = new ReturnT<>(IJobHandler.SUCCESS.getCode(),msg);
         return returnT;
     }
